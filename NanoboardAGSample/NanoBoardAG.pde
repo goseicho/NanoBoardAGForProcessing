@@ -34,9 +34,10 @@ class NanoBoardAG {
   int[] data = new int[maxNumReadings];
   int   val;
 
-  NanoBoardAG(PApplet p){
+  NanoBoardAG(PApplet p, int num){
     // ポート番号の指定通常は 0 0でだめなら1,2,と順次増やして行く
-    String port = Serial.list()[2];
+    String port = Serial.list()[num];
+    printArray(Serial.list());
     myPort = new Serial(p, port, 38400);
   }
 
@@ -96,7 +97,8 @@ class NanoBoardAG {
 
 
   void serialEvent(Serial p){
- 
+
+    if (p != myPort) return;
     val = myPort.read();  
     data[index] = val;
 
