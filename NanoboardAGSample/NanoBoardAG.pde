@@ -123,6 +123,7 @@ class NanoBoardAG {
     motorDirectionB = (byte)((motorDirectionA + 1)  & 0x1);
   }
 
+  // NanoBoardAGにモータの制御情報を送出
   void sendData(){
     if (is2motor){
       myPort.write(motorDirectionA << 7 | (motorPowerA >> 4 ) << 4 | motorDirectionB << 3 | motorPowerB >> 4 );
@@ -136,6 +137,7 @@ class NanoBoardAG {
     myPort.write(0);
   }
 
+  // NanoBoardAGから各種センサデータを受け取ったら呼ばれるメソッド
   void serialEvent(Serial p){
 
     if (p != myPort) return;

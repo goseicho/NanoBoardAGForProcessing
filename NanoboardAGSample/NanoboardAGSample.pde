@@ -8,12 +8,12 @@ int displayID = 0;
 int counterID = 0;
 
 void setup(){
-  size(480, 480);
+  size(640, 480);
   nb = new NanoBoardAG[arrayOfPortID.length];
   h  = new Human[arrayOfPortID.length];
   for(int i = 0; i< arrayOfPortID.length; i++){
     nb[i] = new NanoBoardAG(this, arrayOfPortID[i], true);  // 2モータでNanoBoardAGクラスのインスタンスを生成
-    h[i] = new Human("",175,65);
+    h[i] = new Human("いとう", 175, 65);
 }
   font = createFont("Meiryo", 20);
 }
@@ -46,7 +46,7 @@ void draw(){
   if (timer % 120 == 90) nb[0].reverseMotorDirectionA(); 
   if (timer % 120 == 0) nb[0].setMotorPowerB(100);
 
-  // モータを制御する，さらに最新のセンサデータを取得する．
+  // モータを制御する，さらに最新のセンサデータを取得する．（この部分は重要，これがないと最新のデータが送られて来ない）
   for(int i = 0; i< arrayOfPortID.length; i++){
     nb[i].sendData();
   }

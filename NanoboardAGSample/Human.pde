@@ -5,8 +5,8 @@ class Human {
   private double taijyu;  // 体重
   private int x = 0; // 表示のX座標
   private int y = 0; // 表示のY座標
-  private PImage stand = loadImage("goseicho1.png");
-  private PImage bow = loadImage("goseicho2.png");
+  private PImage stand = loadImage("master.png");
+  private PImage bow = loadImage("master2.png");
   private int time = 0;
   private int step = 0;
 
@@ -15,11 +15,13 @@ class Human {
     this.shincho = 170.0;
     this.taijyu = 65.0;
   }
+  
   Human(String name) {
     this.name = name;
     this.shincho = 170.0;
     this.taijyu = 65.0;
   }
+  
   Human(String name, double shincho, double taijyu) {
     this.name = name;
     this.shincho = shincho;
@@ -33,10 +35,14 @@ class Human {
   void update(){
     time = time + step;
     if (time == 0) {
-      image(stand, (int)(x - stand.width/2), (int)(y - stand.height/2/4 ), stand.width/4, stand.height/4);
+      image(stand, (int)(x - stand.width/2), (int)(y - stand.height/2 ), stand.width, stand.height);
     } else {
-      image(bow, (int)(x - bow.width/2), (int)(y - bow.height/2/4 ), bow.width/4, bow.height/4);
+      image(bow, (int)(x - bow.width/2), (int)(y - bow.height/2 ) - 20 , bow.width, bow.height);
     }    
+    // 名前を一文字づつ縦に表示する．
+    for(int i = 0; i < this.name.length(); i++){ 
+      text(this.name.charAt(i) , x - 5, y - 30 + i * 10);
+    }
     if (time == 60) {
       step = 0;
       time = 0;
